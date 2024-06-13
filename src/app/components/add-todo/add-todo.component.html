@@ -1,0 +1,17 @@
+<div>
+  <input [(ngModel)]="title" type="text" placeholder="Input Title" />
+  <input
+    [(ngModel)]="description"
+    type="text"
+    placeholder="Input Description"
+  />
+  <input [(ngModel)]="date" type="date" />
+  <div>
+    <input [(ngModel)]="isTimeRequired" type="checkbox" id="isTimeRequired" />
+    <label for="isTimeRequired">Time</label>
+  </div>
+  @if (isTimeRequired) {
+  <input [(ngModel)]="time" type="time" />
+  }
+  <button (click)="addTodo()">Add</button>
+</div>

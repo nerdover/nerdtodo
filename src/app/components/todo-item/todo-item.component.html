@@ -1,0 +1,20 @@
+<div>
+  <h2>{{ todo().title }}</h2>
+  <p>{{ todo().description }}</p>
+</div>
+<span>{{ todo().dueDate | date : "short" }}</span>
+<span>{{ todo().done ? "DONE" : "DOING" }}</span>
+<div>
+  <button (click)="setToFinished()">Finished</button>
+  <button (click)="editPanel.open()">Edit</button>
+  <button (click)="deleteTodo()">Delete</button>
+</div>
+
+@if (editPanel.isOpened) {
+<app-edit-todo
+  [id]="todo().id"
+  [title]="todo().title"
+  [description]="todo().description"
+  (close)="editPanel.close()"
+/>
+}

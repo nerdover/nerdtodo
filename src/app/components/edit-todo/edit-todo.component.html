@@ -1,0 +1,32 @@
+<div>
+  <input
+    [ngModel]="title()"
+    (ngModelChange)="title.set($event)"
+    type="text"
+    placeholder="Input Title"
+  />
+  <input
+    [(ngModel)]="description"
+    type="text"
+    placeholder="Input Description"
+  />
+  <div>
+    <input
+      [(ngModel)]="isUsePreviousTime"
+      type="checkbox"
+      id="isUsePreviousTime"
+    />
+    <label for="isUsePreviousTime">Use Previous Time</label>
+  </div>
+  @if (!isUsePreviousTime) {
+  <input [(ngModel)]="date" type="date" />
+  <div>
+    <input [(ngModel)]="isTimeRequired" type="checkbox" id="isTimeRequired" />
+    <label for="isTimeRequired">Time</label>
+  </div>
+  @if (isTimeRequired) {
+  <input [(ngModel)]="time" type="time" />
+  } }
+  <button (click)="updateTodo()">Update</button>
+  <button (click)="cancel()">Cancel</button>
+</div>
