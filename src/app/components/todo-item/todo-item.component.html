@@ -1,20 +1,56 @@
-<div>
-  <h2>{{ todo().title }}</h2>
-  <p>{{ todo().description }}</p>
+<div class="p-4">
+  <div class="flex justify-between items-center gap-4">
+    <div class="flex gap-4">
+      <div
+        class="size-6 group border-2 rounded-full p-0.5"
+        [ngClass]="[todo().done ? 'border-green-700' : '']"
+      >
+        <button
+          (click)="setToFinished()"
+          class="flex items-center size-4 rounded-full"
+          [ngClass]="[todo().done ? 'bg-green-700' : 'hover:bg-zinc-300']"
+          [disabled]="todo().done"
+        ></button>
+      </div>
+      <div class="space-y-1">
+        <h3>{{ todo().title }}</h3>
+        @if (todo().description; as desc) {
+        <p class="text-zinc-400">{{ desc }}</p>
+        }
+        <span class="text-sm text-zinc-400">{{
+          todo().dueDate | date : "short"
+        }}</span>
+      </div>
+    </div>
+    <div class="relative">
+      <button
+        (click)="menuPanel.toggle()"
+        class="flex items-center p-2 rounded-full text-zinc-400 hover:bg-zinc-50"
+      >
+        <span class="msr">more_vert</span>
+      </button>
+      @if (menuPanel.isOpened) {
+      <div
+        class="absolute top-10 right-0 w-40 p-2 rounded-xl bg-white shadow-lg z-10"
+      >
+        <div class="relative">
+          <button
+            (click)="transferEditTodoData()"
+            class="menu-button text-yellow-500 hover:bg-yellow-50"
+          >
+            <span class="msr">edit</span> แก้ไข
+          </button>
+        </div>
+        <div>
+          <button
+            (click)="deleteTodo()"
+            class="menu-button text-red-500 hover:bg-red-50"
+          >
+            <span class="msr">delete</span> ลบ
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
 </div>
-<span>{{ todo().dueDate | date : "short" }}</span>
-<span>{{ todo().done ? "DONE" : "DOING" }}</span>
-<div>
-  <button (click)="setToFinished()">Finished</button>
-  <button (click)="editPanel.open()">Edit</button>
-  <button (click)="deleteTodo()">Delete</button>
-</div>
-
-@if (editPanel.isOpened) {
-<app-edit-todo
-  [id]="todo().id"
-  [title]="todo().title"
-  [description]="todo().description"
-  (close)="editPanel.close()"
-/>
-}

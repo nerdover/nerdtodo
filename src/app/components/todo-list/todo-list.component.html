@@ -1,2 +1,31 @@
-<app-add-todo></app-add-todo>
-<ng-content></ng-content>
+<div class="flex">
+  <div class="grow p-4">
+    <h1 class="text-4xl font-black p-4">Inbox</h1>
+    <div class="divide-y">
+      @for (todo of todoList(); track todo.id) {
+
+      <app-todo-item [todo]="todo" />
+      } @empty {
+      <p>ยังไม่มีสิ่งที่ต้องทำ</p>
+      }
+    </div>
+  </div>
+  @if (editService.editTodoPanel.isOpened && editService.currentEditTodo()) {
+  <div class="shrink-0 w-[312px] h-dvh sticky top-0">
+    <app-edit-todo
+      [id]="editService.currentEditTodo()?.id"
+      [title]="editService.currentEditTodo()?.title!"
+      [description]="editService.currentEditTodo()?.description"
+      (close)="clearEditData()"
+    />
+  </div>
+  } @if (addTodoPanel.isOpened) {
+  <div class="shrink-0 w-[312px] h-dvh sticky top-0">
+    <app-add-todo (close)="addTodoPanel.close()"></app-add-todo>
+  </div>
+  } @else {
+  <button (click)="addTodoPanel.open()" class="button-circle">
+    <span class="msr">add</span>
+  </button>
+  }
+</div>

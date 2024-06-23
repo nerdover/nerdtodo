@@ -1,3 +1,5 @@
+import { signal } from '@angular/core';
+
 export class Switch {
   isOpened = false;
 

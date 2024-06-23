@@ -20,5 +20,7 @@ export const joinDateAndTime = (date: string, time: string) =>
 export const getOneMoreHourFromNow = () => {
   let now = new Date();
   now.setHours(now.getHours() + 1);
-  return now;
+  return new Date(now);
 };
+
+export const getYearBE = (ADYear: number) => ADYear + 543;

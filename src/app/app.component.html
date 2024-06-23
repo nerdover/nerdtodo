@@ -1,9 +1,8 @@
-@if (todos.todoList(); as todoList) {
-<app-todo-list>
-  @for (todo of todoList; track todo.id) {
-  <app-todo-item [todo]="todo" />
-  } @empty {
-  <p>Your todo is empty</p>
-  }
-</app-todo-list>
-}
+<div class="flex min-h-dvh">
+  <!-- <div class="w-72 bg-red-50"></div> -->
+  <div class="grow">
+    @if (todoList()) {
+    <app-todo-list [todoList]="todoList()!" />
+    }
+  </div>
+</div>

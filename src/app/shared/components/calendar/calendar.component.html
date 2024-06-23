@@ -1,0 +1,56 @@
+<div class="space-y-2">
+  <div class="flex gap-4 justify-between items-center">
+    <button
+      class="px-4 py-2 rounded-xl"
+      (click)="mnthyrPanel.toggle()"
+      [ngClass]="{
+        'shadow-inner bg-zinc-50/50': mnthyrPanel.isOpened
+      }"
+    >
+      {{ months[selectedMonth()] }} {{ selectedBEYear() }}
+    </button>
+    <div class="flex items-center gap-4">
+      <button (click)="decrementMonth()" class="flex items-center p-1">
+        <span class="msr">chevron_left</span>
+      </button>
+      <button (click)="incrementMonth()" class="flex items-center p-1">
+        <span class="msr">chevron_right</span>
+      </button>
+    </div>
+  </div>
+  @if (mnthyrPanel.isOpened) {
+  <app-month-year-selector
+    [selectedMonth]="selectedMonth()"
+    [selectedYear]="selectedYear()"
+    (selectedMonthChange)="changeMonth($event)"
+    (selectedYearChange)="changeYear($event)"
+  ></app-month-year-selector>
+  } @else {
+  <div class="space-y-1">
+    <ul class="calendar-header">
+      @for (day of weekdays; track $index) {
+      <li class="size-8 flex justify-center items-center">{{ day }}</li>
+      }
+    </ul>
+    <ul class="calendar-body">
+      @for (item of calendarPane(); track $index) {
+      <li class="size-8">
+        <button
+          [disabled]="!item.isCurrentMonth"
+          (click)="changeSelecting(item.date)"
+          class="size-8 rounded-full flex justify-center items-center disabled:text-zinc-400"
+          [ngClass]="[
+            item.isCurrentMonth ? 'hover:bg-blue-50 hover:font-semibold' : '',
+            item.date === selectedDate() && item.isCurrentMonth
+              ? 'bg-green-200 hover:bg-green-200 font-semibold'
+              : ''
+          ]"
+        >
+          {{ item.date }}
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>

@@ -1,0 +1,28 @@
+<div class="mnthyr-selector">
+  <ul class="scroller" #monthCtn>
+    @for (month of months; track $index) {
+    <li
+      role="button"
+      (click)="selectMonth($index)"
+      [ngClass]="{
+        active: $index === selectedMonth()
+      }"
+    >
+      {{ month }}
+    </li>
+    }
+  </ul>
+  <ul class="scroller" #yearCtn>
+    @for (year of range(minYear(), maxYear()); track $index) {
+    <li
+      role="button"
+      (click)="selectYear(year)"
+      [ngClass]="{
+        active: year === selectedYear()
+      }"
+    >
+      {{ getYearBE(year) }}
+    </li>
+    }
+  </ul>
+</div>

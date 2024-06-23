@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.calendar-header {
+  @apply grid grid-cols-7 place-items-center gap-1 text-xs text-zinc-400;
+}
+
+.calendar-body {
+  @apply grid grid-cols-7 place-items-center gap-1 text-sm;
+}

@@ -1,32 +1,55 @@
-<div>
-  <input
-    [ngModel]="title()"
-    (ngModelChange)="title.set($event)"
-    type="text"
-    placeholder="Input Title"
-  />
-  <input
-    [(ngModel)]="description"
-    type="text"
-    placeholder="Input Description"
-  />
-  <div>
-    <input
-      [(ngModel)]="isUsePreviousTime"
-      type="checkbox"
-      id="isUsePreviousTime"
-    />
-    <label for="isUsePreviousTime">Use Previous Time</label>
+<div class="p-4 space-y-4">
+  <div class="flex gap-4 justify-between items-center">
+    <button (click)="cancel()" class="button-text text-red-500">ปิด</button>
+    <button (click)="updateTodo()" class="button-text text-blue-500">
+      เสร็จสิ้น
+    </button>
   </div>
-  @if (!isUsePreviousTime) {
-  <input [(ngModel)]="date" type="date" />
-  <div>
-    <input [(ngModel)]="isTimeRequired" type="checkbox" id="isTimeRequired" />
-    <label for="isTimeRequired">Time</label>
+  <div class="px-4">
+    <textarea
+      [(ngModel)]="title"
+      [rows]="1"
+      [placeholder]="titlePlaceholder"
+      name="title"
+      id="title"
+      #titleRef
+    ></textarea>
+    <textarea
+      [(ngModel)]="description"
+      type="text"
+      class="text-sm text-zinc-400"
+      [placeholder]="descriptionPlaceholder"
+      name="description"
+      id="description"
+    ></textarea>
   </div>
-  @if (isTimeRequired) {
-  <input [(ngModel)]="time" type="time" />
-  } }
-  <button (click)="updateTodo()">Update</button>
-  <button (click)="cancel()">Cancel</button>
+  <div class="px-4 space-y-4">
+    <div class="option">
+      <div class="option-label">
+        <span class="msr">calendar_month</span>
+        {{ dueDateLabel }}
+      </div>
+      <Switch [(bind)]="isDueDateRequired" />
+    </div>
+    @if (isDueDateRequired) {
+    <div class="option">
+      <div class="option-label">
+        <span class="msr">history</span>
+        {{ usePreviousTimeLabel }}
+      </div>
+      <Switch [(bind)]="isUsePreviousTime" />
+    </div>
+    @if (!isUsePreviousTime) {
+    <Calendar [(selecting)]="now" />
+    <div class="option">
+      <div class="option-label">
+        <span class="msr">schedule</span>
+        {{ dueTimeLabel }}
+      </div>
+      <Switch [(bind)]="isTimeRequired" />
+    </div>
+    @if (isTimeRequired) {
+    <input [ngModel]="time()" (ngModelChange)="setTime($event)" type="time" />
+    } }}
+  </div>
 </div>

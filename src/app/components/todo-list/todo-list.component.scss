@@ -1,0 +1,8 @@
+.button-circle {
+    @apply fixed bottom-4 right-4
+           flex items-center
+           text-white bg-blue-700
+           p-2
+           rounded-full
+           shadow-md
+}

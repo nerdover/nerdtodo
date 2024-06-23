@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.mnthyr-selector ul::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.mnthyr-selector {
+  @apply h-[248px] p-2
+         relative
+         grid grid-cols-2 gap-2 
+         text-center
+         shadow-inner rounded-xl
+         bg-zinc-50/50;
+
+  ul.scroller {
+    @apply h-full overflow-y-scroll snap-y;
+
+    li {
+      @apply px-4 py-2 rounded-lg snap-center;
+
+      &.active {
+        @apply bg-zinc-100;
+      }
+    }
+  }
+}

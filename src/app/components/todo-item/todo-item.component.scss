@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+.menu-button {
+  @apply w-full
+         flex items-center gap-2
+         p-2 rounded-lg
+         font-semibold;
+}
